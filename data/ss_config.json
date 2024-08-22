@@ -1,0 +1,32 @@
+{
+  "log": {
+    "access": "/var/log/ss/access.log",
+    "error": "/var/log/ss/error.log",
+    "loglevel": "info",
+    "dnsLog": true
+  },
+  "routing": {
+    "rules": [],
+    "domainStrategy": "AsIs"
+  },
+  "inbounds": [{
+      "port": 23,
+      "tag": "ss",
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "2022-blake3-aes-128-gcm",
+	"password": "12345678901234567890123456789012",
+        "network": "tcp,udp"
+      }
+    }],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+env/
+.idea/
+__pycache__/
+log/
+.DS_Store
+*.py[co]
+Xray-linux-64.zip*
+data/api_config.yml
+data/backup.api_config.yml
+.python-version

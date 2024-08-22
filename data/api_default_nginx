@@ -1,0 +1,51 @@
+server {
+  listen 80;
+  server_name _;  # Вместо _ указать фактический ip4v адрес сервера
+  root /home/dim/ss_api;
+  index index.html index.htm index.nginx-debian.html;
+
+  location / {
+    allow 62.113.113.93;
+    deny all;
+    try_files $uri $uri/ =404;
+  }  
+
+  # ShadowSocks-2022 REST API
+  location /link {
+    allow 62.113.113.93;
+    deny all;
+    proxy_pass http://unix:/run/ss_api.sock;
+    proxy_redirect     off;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+    proxy_set_header   X-Forwarded-Proto $scheme;
+    proxy_set_header   Host $http_host;
+  }
+
+  # Закрываем доступ к файлам начинающимся с точки
+  location ~ /\. {
+    deny all;
+    access_log off;
+    log_not_found off;
+  }
+
+  # Отключаем логи для favicon и robots.txt
+  location = /favicon.ico {
+    log_not_found off; access_log off;
+  }
+
+  location = /robots.txt {
+    allow all;
+    log_not_found off;
+    access_log off;
+  }
+
+  location ~ /\.ht {
+    deny all;
+  }
+
+  location ~ /.well-known {
+    allow all;
+  }
+}

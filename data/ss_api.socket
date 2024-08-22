@@ -1,0 +1,8 @@
+[Unit]
+Description=ShadowSocks-2022 API socket
+
+[Socket]
+ListenStream=/run/ss_api.sock
+
+[Install]
+WantedBy=sockets.target

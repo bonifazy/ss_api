@@ -1,0 +1,16 @@
+[Unit]
+Description=ShadowSocks-2022 API gunicorn daemon
+Requires=ss_api.socket
+After=network.target
+
+[Service]
+User=dim
+Group=www-data
+WorkingDirectory=/home/dim/ss_api
+ExecStart=/home/dim/ss_api/env/bin/gunicorn -k uvicorn.workers.UvicornWorker \
+	--access-logfile ./log/access.log --error-logfile ./log/error.log --log-level debug --workers 1 \
+	--bind unix:/run/ss_api.sock --proxy-protocol --proxy-allow-from '*' \
+	--forwarded-allow-ips '*' data.main:app
+
+[Install]
+WantedBy=multi-user.target
