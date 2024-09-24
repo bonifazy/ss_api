@@ -14,7 +14,6 @@ sudo resolvectl status
 
 # allow rule for REST API
 sudo ufw allow from 62.113.113.93 to any port 80 proto tcp comment "SS 2022 management"
-sudo ufw allow 23/tcp comment "SS 2022 Server"
 sudo ufw enable
 sudo ufw reload
 

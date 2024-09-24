@@ -60,6 +60,11 @@ HOST: !!str $ip4_name
 SS_RESTART: !!str /home/dim/ss/restart.sh
 SS_CONFIG: !!str /home/dim/ss/ss_config.json" > data/api_config.yml
 
+# Allow ufw rule for ShadowSocks-AEAD server
+sudo ufw allow 23/tcp comment "ShadowSocks-AEAD 2022 - Server"
+sudo ufw enable
+sudo ufw reload
+
 sudo cp data/ss.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl enable ss
