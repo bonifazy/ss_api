@@ -2,7 +2,7 @@
 
 echo "Update ss_api"
 
-cd ~/ss_api
+cd /home/dim/ss_api || return
 echo "
 git stash:"
 git stash

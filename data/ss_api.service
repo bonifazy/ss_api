@@ -2,6 +2,7 @@
 Description=ShadowSocks-2022 API gunicorn daemon
 Requires=ss_api.socket
 After=network.target
+After=nginx.service
 
 [Service]
 User=dim

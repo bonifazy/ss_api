@@ -1,12 +1,10 @@
 from fastapi import FastAPI, Header
 from fastapi.responses import JSONResponse
 from passlib.context import CryptContext
-from subprocess import Popen, PIPE
 from pathlib import Path
 from typing import Optional, Annotated
-from uuid import uuid4
 from base64 import b64encode
-from json import loads, dumps
+from json import loads
 import yaml
 
 
@@ -151,7 +149,7 @@ def get_link(authorization: str | None = Header(default=None)):
 
 
 # Проверка подключения FastApi.
-# Если есть ошибка в файле конфигурации data/api_config.yml, закрыть коннектор FastAPI, отправить предупреждение об ошибке
+# Если есть ошибка в файле конфигурации YAML_FILE, закрыть коннектор FastAPI, отправить предупреждение об ошибке
 if config_is_correct():
     with open(YAML_FILE) as file:
         yaml_data = yaml.safe_load(file)
@@ -174,4 +172,3 @@ else:
 
 if __name__ == '__main__':
     print(f'config_is_correct(): {config_is_correct()}')
-

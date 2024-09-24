@@ -3,8 +3,8 @@
 # Edit default DNS server
 sudo apt install -y resolvconf
 sudo cp /etc/resolvconf/resolv.conf.d/head /etc/resolvconf/resolv.conf.d/backup.head
-sudo echo "nameserver 84.200.69.80
-nameserver 84.200.70.40" > /etc/resolvconf/resolv.conf.d/head
+echo "nameserver 84.200.69.80
+nameserver 84.200.70.40" | sudo tee /etc/resolvconf/resolv.conf.d/head
 sudo chown root:root /etc/resolvconf/resolv.conf.d
 sudo resolvconf --enable-updates
 sudo resolvconf -u
@@ -33,8 +33,6 @@ sudo systemctl restart nginx
 sudo systemctl status nginx
 
 # Install python3.10
-# sudo apt install software-properties-common -y
-# sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.10 -y
 sudo apt install python3.10-venv -y
 python3.10 -m venv env
@@ -46,6 +44,8 @@ deactivate
 # prepare home profile and ss_api folder
 sudo usermod -aG www-data dim
 sudo chown dim:www-data /home/dim/ss_api/data/main.py
+
+# Logging feature
 if [ -e log ]; then
     echo 'directory log/ exists.'
     truncate --size 0 log/access.log

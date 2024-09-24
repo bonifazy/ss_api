@@ -19,6 +19,7 @@ if [ -e /var/log/ss ]; then
     sudo truncate --size 0 /var/log/ss/access.log
     sudo truncate --size 0 /var/log/ss/error.log
 else
+    echo 'From ss_api: dir /var/log/ss is created.'
     sudo mkdir /var/log/ss
     sudo touch /var/log/ss/access.log
     sudo touch /var/log/ss/error.log
@@ -73,7 +74,7 @@ cat ss_config.json:"
 cat /home/dim/ss/ss_config.json
 
 echo "
-# From ss_api: clear log file (without erazing error.log) and restart SS-2022 server
+# From ss_api: clear log file (without error.log) and restart SS-2022 server
 0 6,10,14,18,22 * * * truncate --size 0 /var/log/ss/access.log
 0 6,10,14,18,22 * * * systemctl restart ss
 
