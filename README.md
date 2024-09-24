@@ -13,10 +13,11 @@
 2. Проверить файл настроек SS-AEAD сервера data/api_config.yml
 для корректной установки сервиса менеджмента.
 
+
 3. Запустить 2_install_ss_api.sh
 Скрипт установит сервис менеджмента ShadowSocks-AEAD сервера,
-исходя из настроек data/api_config.yml
-Сервис имеет 1 endpoint: host/link -- прямые настройки к серверу SS-AEAD 
+исходя из настроек data/api_config.yml. 
+Сервис имеет 1 endpoint: host/link -- прямые настройки к серверу SS-AEAD
 для любого клиента SS-AEAD (Xray-core).
 Скрипт создает: 
   - systemd сервис ss_api.socket, ss_api.service
