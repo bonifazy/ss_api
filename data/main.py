@@ -138,7 +138,7 @@ def get_link(authorization: str | None = Header(default=None)):
         _method = inbound['settings']['method']
         _passwd = inbound['settings']['password']
         settings_line_bytes = f'{_method}:{_passwd}@{HOST}:{_port}'.encode('ascii')
-        encoded_settings = b64encode(settings_line_bytes)[:-1].decode('ascii')
+        encoded_settings = b64encode(settings_line_bytes).decode('ascii')
         content = {'settings': encoded_settings}
 
     # блок inbound.protocol == 'shadowsocks' не найден, нет клиентов
