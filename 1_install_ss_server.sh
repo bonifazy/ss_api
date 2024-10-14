@@ -79,14 +79,11 @@ cat ss_config.json:"
 cat /home/dim/ss/ss_config.json
 
 echo "
-# From ss_api: clear log file (without error.log) and restart SS-2022 server
-0 6,10,14,18,22 * * * truncate --size 0 /var/log/ss/access.log
-0 6,10,14,18,22 * * * systemctl restart ss
+# From ss_api: clear log file (without clear error.log) and restart SS-2022 server
+0 6,10,14,18,22 * * * truncate --size 0 /var/log/ss/access.log && systemctl restart ss
 
 # Every day change password and restart SS-2022 server
-0 0 * * * /home/dim/ss/change_server_pass.sh
-1 0 * * * /home/dim/ss/restart.sh
-" | sudo tee -a /var/spool/cron/crontabs/root
+59 2 * * * /home/dim/ss/change_server_pass.sh && systemctl restart ss" | sudo tee -a /var/spool/cron/crontabs/root
 sudo systemctl restart cron
 
 echo "
